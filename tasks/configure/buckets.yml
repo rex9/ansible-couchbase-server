@@ -1,7 +1,6 @@
 ---
 # Docs: https://docs.couchbase.com/server/current/cli/cbcli/couchbase-cli-bucket-create.html
 - name: Create Buckets
-  no_log: true
   shell:
     cmd: |
       if /opt/couchbase/bin/couchbase-cli bucket-list \
@@ -33,7 +32,7 @@
           --wait
         fi
   with_items: "{{ couchbase_buckets }}"
-  when: couchbase_master is defined and couchbase_master == inventory_hostname
+  when: couchbase_master is defined and couchbase_master == inventory_hostname and couchbase_server_edition == "enterprise"
   tags:
     - couchbase_configure
     - couchbase_buckets

@@ -1,7 +1,6 @@
 ---
 # Docs: https://docs.couchbase.com/server/current/cli/cbdocloader-tool.html
 - name: Create Sample Buckets Buckets
-  no_log: true
   shell:
     cmd: |
       /opt/couchbase/bin/cbdocloader \

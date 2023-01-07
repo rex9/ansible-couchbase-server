@@ -8,9 +8,11 @@
     - couchbase_debug
 
 - name: Preflight
-  include: "{{ item }}"
+  include_tasks: "{{ preflight_item }}"
   with_fileglob:
     - preflight/*.yml
+  loop_control:
+    loop_var: preflight_item
   tags:
     - couchbase_install
     - couchbase_debug

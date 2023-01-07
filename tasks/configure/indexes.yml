@@ -1,6 +1,5 @@
 ---
 - name: Get all of the nodes in the cluster
-  no_log: true
   uri:
     url: "http://{{ inventory_hostname }}:{{ couchbase_cluster.port | default(8091) }}/pools/nodes"
     url_username: "{{ couchbase_security.admin_user | default('Administrator') }}"
@@ -25,7 +24,6 @@
     - couchbase_indexes
 
 - name: Create Indexes
-  no_log: true
   uri:
     url: "http://{{ query_nodes | random }}:8093/query/service"
     url_username: "{{ couchbase_security.admin_user | default('Administrator') }}"
@@ -73,7 +71,6 @@
     - '"already exists" not in result.json.errors[0].msg'
 
 - name: Build the indexes on each of the buckets
-  no_log: true
   uri:
     url: "http://{{ query_nodes | random }}:8093/query/service"
     url_username: "{{ couchbase_security.admin_user | default('Administrator') }}"

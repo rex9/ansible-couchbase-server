@@ -1,1 +1,5 @@
 ---
+- name: reload sysctl
+  tags: sysctl
+  command: sysctl -e -p /etc/sysctl.d/couchbase-server.conf
+
