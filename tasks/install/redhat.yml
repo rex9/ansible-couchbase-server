@@ -20,10 +20,12 @@
 
 - name: Get the Latest Couchbase Package Version  # noqa 303
   shell: |
-    set -o pipefail && yum list --showduplicates couchbase-server \
+    set -o pipefail && yum list --showduplicates couchbase-server{% if couchbase_server_edition == 'community' %}-community{% endif %} \
       | tail -1 \
-      | sed -E 's/^couchbase-server[^ ]+\s+|\s+couchbase-server\s*$//g'
+      | sed -E 's/^couchbase-server-community[^ ]+\s+|\s+couchbase-server-community\s*$//g' \
+      | sed -E 's/^couchbase-server[^ ]+\s+|\s+couchbase-server\s*$//g' \
   register: couchbase_latest_version
+  changed_when: false
   become: true
   when: ((couchbase_server_download_url is defined) and (couchbase_server_download_url | length == 0)) and couchbase_server_version == 'latest'
   tags:

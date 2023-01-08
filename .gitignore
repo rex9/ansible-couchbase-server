@@ -13,3 +13,4 @@ meta/.galaxy_install_info
 Thumbs.db
 thumbs.db
 .idea
+*.swp

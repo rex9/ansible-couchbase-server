@@ -34,7 +34,7 @@
         --move-servers '{{ item.hostname }}' \
         --from-group 'Group 1' \
         --to-group '{{ item.group }}'
-  when: couchbase_master is defined and couchbase_master == inventory_hostname
+  when: couchbase_master is defined and couchbase_master == inventory_hostname and couchbase_server_edition == "enterprise"
   loop: "{{ couchbase_nodes | selectattr('group', 'defined') | list }}"
   tags:
     - couchbase_configure
